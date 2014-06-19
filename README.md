@@ -7,7 +7,7 @@ Mention bin allows anyone to create a campaign page, that lets people target the
 
 Define the process environment for Mongo in order to run server.js.
 
-**Example:**  MONGOHQ_URL='mongodb://127.0.0.1' node server.js
+### Getting started
 
 ```
 npm install
