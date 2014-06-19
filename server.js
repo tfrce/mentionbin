@@ -8,11 +8,11 @@ var fs = require("fs");
 var _ = require("lodash");
 var bodyParser = require('body-parser');
 var marked = require("marked");
-
+var enforce = require('express-sslify');
 var app = express();
 app.use(express.static(__dirname + '/public', {maxAge: 0 * 1000}));
 app.use(bodyParser());
-
+app.use(enforce.HTTPS());
 
 
 var templates = {
@@ -42,7 +42,12 @@ var generatePage = function (options) {
 
 }
 
-
+app.get('*',function(req,res,next){
+  if(req.headers['x-forwarded-proto']!='https')
+    res.redirect('https://mypreferreddomain.com'+req.url)
+  else
+    next() /* Continue to other routes if we're not redirecting */
+})
 
 function S4() {
     return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
