@@ -12,12 +12,12 @@ var marked = require("marked");
 var app = express();
 app.use(express.static(__dirname + '/public', {maxAge: 0 * 1000}));
 app.use(bodyParser());
+
 if(process.env.FORCE_SSL) {
   console.log('wtf');
   var enforce = require('express-sslify');
   app.use(enforce.HTTPS());
 }
-
 
 var templates = {
   layout: fs.readFileSync('templates/layout.html', 'utf8'),
@@ -152,7 +152,7 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
     });
     res.send({message: 'logged'});
   });
-  var port = Number(process.env.PORT || 5000);
+  var port = Number(process.env.PORT || 5002);
   app.listen(port, function() {
     console.log("Listening on " + port);
   });
