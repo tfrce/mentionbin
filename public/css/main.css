@@ -1,0 +1,21 @@
+textarea {
+       resize: both;
+    } /* none|horizontal|vertical|both */
+textarea.vert {
+       resize: vertical;
+    }
+textarea.noResize {
+       resize: none;
+    }
+.tweet-container {
+  padding: 10px;
+  background-color:
+}
+.tweet-text {
+  height: 40px;
+  width: 100%;
+  border: 1px solid #ebebeb;
+}
+.target-profile {
+  width: 70px;
+}
