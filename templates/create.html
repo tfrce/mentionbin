@@ -1,1 +1,18 @@
-create
+<h2>Create your own campaign</h2>
+<p>When you create, you will be supplied with a public url to your campaign which you can share with your community to allow them to target their legislators</p>
+<form role="form" action="/create" method="post">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Title</label>
+    <input type="text" name="title" class="form-control" placeholder="Title">
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Desription</label>
+    <textarea class="form-control" name="description" placeholder="Message"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Tweet Text</label>
+    <input type="text" name="tweet" class="form-control" placeholder="Tweet Text">
+  </div>
+  <button type="submit" class="btn btn-default">Create</button>
+</form>

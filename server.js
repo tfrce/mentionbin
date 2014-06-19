@@ -6,12 +6,12 @@ var mongo = require('mongodb');
 var timeago = require('timeago');
 var fs = require("fs");
 var _ = require("lodash");
-//var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 
 
 var app = express();
 app.use(express.static(__dirname + '/public', {maxAge: 7200 * 1000}));
-//app.use(bodyParser());
+app.use(bodyParser());
 
 
 
@@ -42,7 +42,9 @@ var generatePage = function (options) {
 
 
 
-
+function S4() {
+    return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+}
 MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
   app.get('/', function(req, res) {
     res.send(generatePage({
@@ -57,6 +59,19 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
         template: templates.create
       }
     }));
+  });
+  app.post('/create', function(req, res){
+    var public_code = S4() + S4();
+    var document = {
+      description: req.body.description,
+      title: req.body.title,
+      tweet_text: req.body.tweet,
+      public_code: public_code,
+      tweets: 0
+    };
+    db.collection('campaigns').insert(document, {safe: true}, function(err, records){
+      res.redirect('/campaign/' + public_code);
+    });
   });
   app.get('/about', function(req, res) {
     res.send(generatePage({
