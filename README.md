@@ -1,4 +1,3 @@
-tweetbin
-========
 
-Tweet Bin - A pastebin for targetted tweet campaigns
+
+Mention Bin - A pastebin for targetted tweet campaigns

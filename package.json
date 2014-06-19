@@ -1,19 +1,22 @@
 {
-  "name": "tweetbin",
+  "name": "mentionbin",
   "version": "0.0.0",
-  "description": "tweetbin ========",
+  "description": "mentionbin ========",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/tfrce/tweetbin.git"
+    "url": "git://github.com/tfrce/mentionbin.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tfrce/tweetbin/issues"
+    "url": "https://github.com/tfrce/mentionbin/issues"
   },
-  "homepage": "https://github.com/tfrce/tweetbin"
+  "homepage": "https://github.com/tfrce/mentionbin",
+  "dependencies": {
+    "express": "^4.4.3"
+  }
 }
