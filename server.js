@@ -130,7 +130,9 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
       } else {
         campaign.description = marked(campaign.description);
         res.send(generatePage({
+          title: campaign.title + ' | Mention Bin',
           page: {
+            description: campaign.title + ' | Show your support by tweeting your legislators',
             template: templates.campaign,
             data: campaign
           }
