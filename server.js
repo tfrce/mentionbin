@@ -66,6 +66,12 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
     });
 
   });
+  app.get('/tweeted/:public_code', function(req, res) {
+    db.collection('campaigns').update( { public_code: req.params.public_code }, { $inc: { tweets: 1 } }, function () {
+      console.log(arguments);
+    });
+    res.send({message: 'logged'});
+  });
   var port = Number(process.env.PORT || 5000);
   app.listen(port, function() {
     console.log("Listening on " + port);

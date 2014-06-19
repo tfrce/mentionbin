@@ -7,13 +7,15 @@ function getLegislators(zip, cb) {
   });
 }
 function showLegislatorTweets(results) {
-  $('.target-tweets-container').html('');
+  $('.target-tweets-container').html('').hide();
   var template = $('#target-tweet-template').html();
   var message = $('#campaign-tweet-text').text();
   _.each(results, function(result){
     $('.target-tweets-container').append(_.template(template, {target: result, message: message}));
   });
+  $('.target-tweets-container').slideDown(500);
 }
+
 $('.zipcode-form').on('submit', function(ev){
   var form = $(ev.currentTarget);
   var zipcode = $('.zipcode-input').val();
@@ -27,4 +29,11 @@ $('.zipcode-form').on('submit', function(ev){
     }
   });
   return false;
+})
+
+$( "body" ).on('click', '.tweet-this', function() {
+    var url = $(this).attr("href");
+    window.open(url,"Twitter","width=550,height=420");
+    $.get('/tweeted/' + $('[data-public-code]').attr('data-public-code'), {});
+    return false;
 })
