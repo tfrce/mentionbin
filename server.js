@@ -18,6 +18,8 @@ app.use(express.static(__dirname + '/public', {maxAge: 7200 * 1000}));
 var templates = {
   layout: fs.readFileSync('templates/layout.html', 'utf8'),
   home: fs.readFileSync('templates/home.html', 'utf8'),
+  create: fs.readFileSync('templates/create.html', 'utf8'),
+  about: fs.readFileSync('templates/about.html', 'utf8'),
   campaign: fs.readFileSync('templates/campaign.html', 'utf8')
 
 }
@@ -45,6 +47,21 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
   app.get('/', function(req, res) {
     res.send(generatePage({
       page: {
+        template: templates.home
+      }
+    }));
+  });
+  app.get('/create', function(req, res) {
+    res.send(generatePage({
+      page: {
+        template: templates.create
+      }
+    }));
+  });
+  app.get('/about', function(req, res) {
+    res.send(generatePage({
+      page: {
+        template: templates.about
       }
     }));
   });

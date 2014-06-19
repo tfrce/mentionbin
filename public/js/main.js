@@ -35,5 +35,6 @@ $( "body" ).on('click', '.tweet-this', function() {
     var url = $(this).attr("href");
     window.open(url,"Twitter","width=550,height=420");
     $.get('/tweeted/' + $('[data-public-code]').attr('data-public-code'), {});
+    $('.tweet-container').html('Awesome work!')
     return false;
 })
