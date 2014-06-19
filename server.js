@@ -12,7 +12,10 @@ var enforce = require('express-sslify');
 var app = express();
 app.use(express.static(__dirname + '/public', {maxAge: 0 * 1000}));
 app.use(bodyParser());
-app.use(enforce.HTTPS());
+
+if(process.env.FORCE_SSL) {
+  app.use(enforce.HTTPS());
+}
 
 
 var templates = {
