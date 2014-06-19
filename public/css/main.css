@@ -1,12 +1,4 @@
-textarea {
-       resize: both;
-    } /* none|horizontal|vertical|both */
-textarea.vert {
-       resize: vertical;
-    }
-textarea.noResize {
-       resize: none;
-    }
+
 .tweet-container {
   padding: 10px;
   background-color:

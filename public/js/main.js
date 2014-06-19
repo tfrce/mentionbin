@@ -1,5 +1,7 @@
+
+
 $(document).on('ready', function(){
-    
+
   var CONGRESS_URL = 'https://congress.api.sunlightfoundation.com';
   var API_KEY = '8d0caa0295254038a5b61878a06d80ec';
   function getLegislators(zip, cb) {
@@ -41,4 +43,5 @@ $(document).on('ready', function(){
       return false;
   })
 
+  $('textarea').autosize();
 })

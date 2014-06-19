@@ -7,7 +7,7 @@ var timeago = require('timeago');
 var fs = require("fs");
 var _ = require("lodash");
 var bodyParser = require('body-parser');
-
+var marked = require("marked");
 
 var app = express();
 app.use(express.static(__dirname + '/public', {maxAge: 0 * 1000}));
@@ -19,7 +19,9 @@ var templates = {
   layout: fs.readFileSync('templates/layout.html', 'utf8'),
   home: fs.readFileSync('templates/home.html', 'utf8'),
   create: fs.readFileSync('templates/create.html', 'utf8'),
+  edit: fs.readFileSync('templates/edit.html', 'utf8'),
   about: fs.readFileSync('templates/about.html', 'utf8'),
+  privacy: fs.readFileSync('templates/privacy.html', 'utf8'),
   campaign: fs.readFileSync('templates/campaign.html', 'utf8')
 
 }
@@ -60,12 +62,43 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
       }
     }));
   });
+  app.get('/campaign/:public_code/edit', function(req, res) {
+    db.collection('campaigns').findOne({"public_code" : req.params.public_code}, function(err, campaign) {
+      console.log(arguments);
+      if(!campaign) {
+        res.send(generatePage({
+          page: {template: 'Campaign not found'}
+        }));
+      } else {
+        res.send(generatePage({
+          page: {
+            template: templates.edit,
+            data: campaign
+          }
+        }));
+      }
+    });
+  });
+  app.post('/campaign/:public_code/edit', function(req, res) {
+    db.collection('campaigns').findOne({"public_code" : req.params.public_code, "password": req.body.password}, function(err, campaign) {
+      console.log(arguments);
+      if(!campaign) {
+        res.send({status: "Invalid Password"});
+      } else {
+        db.collection('campaigns').update({public_code: req.params.public_code}, {$set: {title:req.body.title, description:req.body.description, tweet_text: req.body.tweet}}, function(err, document){
+
+          res.redirect('/campaign/' + req.params.public_code);
+        });
+      }
+    });
+  });
   app.post('/create', function(req, res){
     var public_code = S4() + S4();
     var document = {
       description: req.body.description,
       title: req.body.title,
       tweet_text: req.body.tweet,
+      password: req.body.password,
       public_code: public_code,
       tweets: 0
     };
@@ -80,6 +113,13 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
       }
     }));
   });
+  app.get('/privacy', function(req, res) {
+    res.send(generatePage({
+      page: {
+        template: templates.privacy
+      }
+    }));
+  });
   app.get('/campaign/:public_code', function(req, res) {
     db.collection('campaigns').findOne({"public_code" : req.params.public_code}, function(err, campaign) {
       console.log(arguments);
@@ -88,6 +128,7 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
           page: {template: 'Campaign not found'}
         }));
       } else {
+        campaign.description = marked(campaign.description);
         res.send(generatePage({
           page: {
             template: templates.campaign,
@@ -100,6 +141,7 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
   });
   app.get('/tweeted/:public_code', function(req, res) {
     db.collection('campaigns').update( { public_code: req.params.public_code }, { $inc: { tweets: 1 } }, function () {
+
       console.log(arguments);
     });
     res.send({message: 'logged'});

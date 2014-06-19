@@ -1,36 +1,41 @@
-
-<h2 data-public-code="{{public_code}}">{{title}}</h2>
-<p>This campaign has generated <strong>{{tweets}}</strong> tweets</p>
-<p>{{description}}</p>
-
-<h3>What will we be tweeting?</h3>
-<blockquote id="campaign-tweet-text">{{tweet_text}}</blockquote>
-<h3>Find and target my legislators!</h3>
-
-
 <div class="row">
-  <div class="col-md-3">
-
-    <form class="zipcode-form" action="" method="">
-      <div class="input-group">
-          <input type="text" class="form-control zipcode-input">
-          <span class="input-group-btn">
-            <input class="btn btn-default" type="submit">Go!</button>
-          </span>
-      </div>
-
-    </form>
+  <div class="col-md-6">
+    <h2 data-public-code="{{public_code}}">{{title}}</h2>
+    <p>This campaign has generated <strong>{{tweets}}</strong> tweets</p>
+    <p>{{{description}}}</p>
+    <hr />
+    <a href="/campaign/{{public_code}}/edit" style="color: #ccc; font-size: 11px;">Edit this campaign</a>
   </div>
-  <div class="col-md-7">
-    <div class="target-tweets-container">
-    Please enter your zip
+  <div class="col-md-6">
+
+    <h3>What will we be tweeting?</h3>
+    <blockquote id="campaign-tweet-text">{{tweet_text}}</blockquote>
+    <h3>Find my legislators!</h3>
+    <div class="row">
+      <div class="col-md-6">
+
+        <form class="zipcode-form" action="" method="">
+          <div class="input-group">
+              <input type="text" class="form-control zipcode-input">
+              <span class="input-group-btn">
+                <input class="btn btn-default" type="submit">Go!</button>
+              </span>
+          </div>
+
+        </form>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+
+      <div class="col-md-12">
+        <div class="target-tweets-container">
+        </div>
+      </div>
     </div>
   </div>
-  <div class="col-md-2">
-  </div>
+
 </div>
-
-
 
 <script type="text/template" id="target-tweet-template">
 
