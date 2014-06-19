@@ -64,7 +64,7 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
   });
   app.get('/campaign/:public_code/edit', function(req, res) {
     db.collection('campaigns').findOne({"public_code" : req.params.public_code}, function(err, campaign) {
-      console.log(arguments);
+
       if(!campaign) {
         res.send(generatePage({
           page: {template: 'Campaign not found'}
@@ -81,7 +81,7 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
   });
   app.post('/campaign/:public_code/edit', function(req, res) {
     db.collection('campaigns').findOne({"public_code" : req.params.public_code, "password": req.body.password}, function(err, campaign) {
-      console.log(arguments);
+
       if(!campaign) {
         res.send({status: "Invalid Password"});
       } else {
@@ -122,7 +122,7 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
   });
   app.get('/campaign/:public_code', function(req, res) {
     db.collection('campaigns').findOne({"public_code" : req.params.public_code}, function(err, campaign) {
-      console.log(arguments);
+
       if(!campaign) {
         res.send(generatePage({
           page: {template: 'Campaign not found'}
@@ -142,9 +142,9 @@ MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
 
   });
   app.get('/tweeted/:public_code', function(req, res) {
+    console.log('Tweet received');
     db.collection('campaigns').update( { public_code: req.params.public_code }, { $inc: { tweets: 1 } }, function () {
 
-      console.log(arguments);
     });
     res.send({message: 'logged'});
   });
