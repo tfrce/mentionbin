@@ -28,7 +28,7 @@ var templates = {
 
 var generatePage = function (options) {
   var layout = options.layout || templates.layout;
-  var title = options.title || 'mentionbin.com - create targeted tweet campaigns on the fly'
+  var title = options.title || 'Mention Bin - Instantly create Twitter campaigns that target US legislators'
   var description = options.page && options.page.description || ''
 
   var page = {
