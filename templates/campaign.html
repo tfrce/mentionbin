@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col-md-6">
     <h2 data-public-code="{{public_code}}">{{title}}</h2>
-    <p>This campaign has generated <strong>{{tweets}}</strong> tweets</p>
     <p>{{{description}}}</p>
     <div class="share-buttons">
 
@@ -22,15 +21,17 @@
 
     <h3>What will we be tweeting?</h3>
     <blockquote id="campaign-tweet-text">{{tweet_text}}</blockquote>
+
+    <p>This campaign has already generated <strong>{{tweets}}</strong> tweets</p>
     <h3>Find my legislators!</h3>
     <div class="row">
       <div class="col-md-6">
 
         <form class="zipcode-form" action="" method="">
           <div class="input-group">
-              <input type="text" class="form-control zipcode-input">
+              <input type="text" placeholder="Enter your zipcode!" class="form-control zipcode-input">
               <span class="input-group-btn">
-                <input class="btn btn-default" type="submit">Go!</button>
+                <input class="btn btn-default" type="submit" value="Lookup">
               </span>
           </div>
 
