@@ -13,11 +13,7 @@ var app = express();
 app.use(express.static(__dirname + '/public', {maxAge: 0 * 1000}));
 app.use(bodyParser());
 
-if(process.env.FORCE_SSL) {
-  console.log('wtf');
-  var enforce = require('express-sslify');
-  app.use(enforce.HTTPS());
-}
+
 
 var templates = {
   layout: fs.readFileSync('templates/layout.html', 'utf8'),
