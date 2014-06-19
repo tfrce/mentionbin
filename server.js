@@ -14,7 +14,7 @@ app.use(express.static(__dirname + '/public', {maxAge: 0 * 1000}));
 app.use(bodyParser());
 
 var forceSsl = function (req, res, next) {
-    if (req.headers['cf-visitor'] &&  req.headers['cf-visitor'].scheme !== 'https') {
+    if (req.headers['cf-visitor'] &&  JSON.parse(req.headers['cf-visitor']).scheme !== 'https') {
         return res.redirect(['https://', req.get('Host'), req.url].join(''));
     } else {
         next();
