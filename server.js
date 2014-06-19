@@ -13,9 +13,16 @@ var app = express();
 app.use(express.static(__dirname + '/public', {maxAge: 0 * 1000}));
 app.use(bodyParser());
 
+var forceSsl = function (req, res, next) {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+        return res.redirect(['https://', req.get('Host'), req.url].join(''));
+    } else {
+        next();
+    }
+};
+
 if(process.env.NODE_ENV === "production") {
-  var enforce = require('express-sslify');
-  app.use(enforce.HTTPS(true));
+  app.use(forceSsl);
 }
 
 var templates = {
