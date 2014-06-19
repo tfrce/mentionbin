@@ -39,9 +39,27 @@ $(document).on('ready', function(){
       var url = $(this).attr("href");
       window.open(url,"Twitter","width=550,height=420");
       $.get('/tweeted/' + $('[data-public-code]').attr('data-public-code'), {});
-      //$(ev.currentTarget).parents('.tweet-container').html('Awesome work!')
+      var thanks = ['Thank you! Keep up the good work!', 'Awesome job! Make sure you share this site with friends!', 'Wonderful!', 'Excellent.', 'Share this site as well!']
+      $(ev.currentTarget).parents('.tweet-container').html(thanks[Math.ceil(Math.random()*5)]);
       return false;
   })
 
   $('textarea').autosize();
+
+  var shareUrl = window.location.href;
+  $.ajax('https://d28jjwuneuxo3n.cloudfront.net/?networks=facebook,twitter,googleplus&url=' + shareUrl, {
+      success: function(res, err) {
+          $.each(res, function(network, value) {
+              var count = value;
+              if (count / 10000 > 1) {
+                  count = Math.ceil(count / 1000) + 'k'
+              }
+              $('[data-network="' + network + '"]').attr('count', count);
+          })
+      },
+      dataType: 'jsonp',
+      cache         : true,
+      jsonpCallback : 'myCallback'
+  });
+
 })

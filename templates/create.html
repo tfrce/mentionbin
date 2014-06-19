@@ -1,22 +1,22 @@
 <h2>Create your own campaign</h2>
 <p>When you create, you will be supplied with a public url to your campaign which you can share with your community to allow them to target their legislators</p>
-<form role="form" action="/create" method="post">
+<form role="form" autocomplete="off" action="/create" method="post">
   <div class="form-group">
     <label for="">Title</label>
-    <input type="text" name="title" class="form-control" placeholder="Title">
+    <input type="text" name="title" value="" class="form-control" placeholder="Title">
   </div>
 
   <div class="form-group">
     <label for="">Description (markdown enabled)</label>
-    <textarea style="min-height: 90px;" class="form-control" name="description" placeholder="Message"></textarea>
+    <textarea style="min-height: 90px;" value="" class="form-control" name="description" placeholder="Message"></textarea>
   </div>
   <div class="form-group">
     <label for="">Tweet Text</label>
-    <input type="text" name="tweet" class="form-control" placeholder="Tweet Text">
+    <input type="text" name="tweet" value="" class="form-control" placeholder="Tweet Text">
   </div>
   <div class="form-group">
     <label for="">Password</label>
-    <input type="password" name="password" class="form-control" placeholder="Password">
+    <input type="password"  value="" name="password" class="form-control" placeholder="Password">
   </div>
   <button type="submit" class="btn btn-default">Create</button>
 </form>
