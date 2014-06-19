@@ -59,7 +59,7 @@ function S4() {
 }
 MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
   app.get('/', function(req, res) {
-    console.log('headers',req.headers['cf-visitor'].scheme);
+    console.log('headers',req.headers);
     res.send(generatePage({
       page: {
         template: templates.home
