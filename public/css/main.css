@@ -10,6 +10,10 @@
 }
 .target-profile {
   width: 70px;
+  border: 2px solid #ccc;
+}
+.target-tweets-container {
+  margin-top: 20px;
 }
 .share-buttons {
   margin-top: 55px;
