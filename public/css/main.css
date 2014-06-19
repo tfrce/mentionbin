@@ -4,9 +4,10 @@
   background-color:
 }
 .tweet-text {
-  height: 40px;
   width: 100%;
   border: 1px solid #ebebeb;
+  padding: 4px;
+  min-height: 75px;
 }
 .target-profile {
   width: 70px;
